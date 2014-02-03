@@ -17,6 +17,15 @@
   )
 )
 
+; Returns the item at an index
+(defun at (L n)
+  (cond
+    ((null L) nil)
+    ((= n 0) (car L))
+    ((at (cdr L) (- n 1)))
+  )
+)
+
 ; takes the first n of a list 
 (defun take (L n)
   (cond
@@ -87,5 +96,12 @@
   (cond
     ( (null (cdr L)) (car L) )
     ( (cons (car L) (apply 'mcons (cdr L)) ) )
+  )
+)
+
+(defun each-nth (L n)
+  (cond
+    ( (null L) nil)
+    ( (cons (at (car L) n) (each-nth (cdr L) n)) )
   )
 )

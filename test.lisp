@@ -13,6 +13,11 @@
     (assert-equal nil (diff '(1 2) '(2 1)) )
 )
 
+(define-test test-at
+    (assert-equal nil (at '(1 2 3) 5))
+    (assert-equal 6 (at '(9 8 7 6 5 4 3 2 1) 3))
+)
+
 (define-test test-delleteAt
     (assert-equal '(1 2 4 5) (deleteAt '(1 2 3 4 5) 2)) 
     (assert-equal '(2 3 4 5) (deleteAt '(1 2 3 4 5) 0))
@@ -59,6 +64,19 @@
     (assert-equal nil (mcons))
     (assert-equal '(1 2) (mcons '(1 2)))
     (assert-equal '(a b c d e) (mcons 'a 'b 'c '(d e)))
+)
+
+(define-test each-nth
+    (assert-equal '() ())
+    (assert-equal '(1 2 3) (each-nth '((1 3) (2 4) (3 5)) 0) )
+    (assert-equal '(mary ann greg judy)
+        (each-nth '(
+            (fred mary sue)
+            (sam ann dave martin)
+            (hank greg joe bill)
+            (jo judy pat jane)
+        ) 1)
+    )
 )
 
 (setq *print-errors* T)
