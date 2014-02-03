@@ -7,6 +7,16 @@
   )
 )
 
+; finds the difference between the first
+; list and the second list
+(defun diff (first second)
+  (cond
+    ( (null first) nil)
+    ( (not (member (car first) second) ) (cons (car first) (diff (cdr first) second) ) )
+    ( (diff (cdr first) second) )
+  )
+)
+
 ; takes the first n of a list 
 (defun take (L n)
   (cond
@@ -48,19 +58,34 @@
   )
 )
 
-; searches one list agains another 
+; searches one list against another 
 ; and returns similar elements 
 (defun similar (first second)
   (cond
     ( (null first) nil)
-    ( (null second) (similar (cdr first) second) )
-    ;( (equal (car first) (car second)) (car second) )
-    ( (similar first (cdr second)) )
+    ( (member (car first) second) (cons (car first) (similar (cdr first) second) ) )
+    ( ( similar (cdr first) second) )
   )
 )
 
-(defun alone (first second)
+; return a list of of elements
+; that don't appear in either list
+(defun different (first second)
+  (append (diff first second) (diff second first) )
 )
 
+; Return the last item in a list
 (defun last-item (L)
+  (cond 
+    ( (null (cdr L)) (car L) )
+    ( (last-item (cdr L)) ) 
+  )
+)
+
+; Puts all arguments in a list
+(defun mcons (&rest L)
+  (cond
+    ( (null (cdr L)) (car L) )
+    ( (cons (car L) (apply 'mcons (cdr L)) ) )
+  )
 )

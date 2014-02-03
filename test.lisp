@@ -3,18 +3,17 @@
 
 (load "functions")
 
-; (define-test test-take
-;     (assert-equal '("a" "b") (take '("a" "b" "c" "d") 2))
-;     (assert-equal nil (take '("a" "b" "c" "d") 0))
-;     (assert-equal nil (take '() 4))
-; )
-
 (define-test test-minusOne
     (assert-equal '(0 1 2 3) (minusOne '(1 2 3 4)) )
     (assert-equal '() (minusOne '()) )
 )
 
-(define-test test-deleteAt
+(define-test test-diff
+    (assert-equal '(0 9) (diff '(0 3 4 7 9 4) '(4 7 5 8 3)) )
+    (assert-equal nil (diff '(1 2) '(2 1)) )
+)
+
+(define-test test-delleteAt
     (assert-equal '(1 2 4 5) (deleteAt '(1 2 3 4 5) 2)) 
     (assert-equal '(2 3 4 5) (deleteAt '(1 2 3 4 5) 0))
     (assert-equal '(1 2 3 4 5) (deleteAt '(1 2 3 4 5) 6))
@@ -38,16 +37,28 @@
 )
 
 (define-test test-similar
-    (assert-equal '(1) (similar '(5 3 1) '(2 1 3)) )
-    ;(assert-equal '(B) (similar '(A B C D E) '(X (A C) B R L)) ) ; from hw
+    (assert-equal nil (similar '(a b c) '(x y z)) )
+    (assert-equal '(1) (similar '(5 7 1) '(2 1 3)) )
+    (assert-equal '(B) (similar '(A B C D E) '(X (A C) B R L)) ) ; from hw
 )
 
-(define-test test-alone
-    (assert-equal '(A C D E X (A C) R L) (alone '(A B C D E) '( X (A C) B R L)) ) ; from hw
+(define-test test-different
+    (assert-equal '() (different '(1 2 3) '(3 1 2) ))
+    (assert-equal '(A B C) (different '(A D E) '(D B C E)))
+    (assert-equal '(A C D E X (A C) R L) (different '(A B C D E) '( X (A C) B R L)) ) ; from hw
 )
 
 (define-test test-last-item
     (assert-equal "G" (last-item '("A" "B" "T" "G")) )
+    (assert-equal '(A B) (last-item '(E G F (A B)) ) )
+    (assert-equal nil (last-item '() ) )
+    (assert-equal "YUP" (last-item '("YUP") ) )
+)
+
+(define-test test-mcons
+    (assert-equal nil (mcons))
+    (assert-equal '(1 2) (mcons '(1 2)))
+    (assert-equal '(a b c d e) (mcons 'a 'b 'c '(d e)))
 )
 
 (setq *print-errors* T)
