@@ -1,44 +1,8 @@
-;;;;; utils
-
-(defun minusOne (L)
-  (cond 
-    ( (null L) NIL) 
-    ( (cons (- (car L) 1) (minusOne (cdr L)) ) )
-  )
-)
-
-; finds the difference between the first
-; list and the second list
-(defun diff (first second)
-  (cond
-    ( (null first) nil)
-    ( (not (member (car first) second) ) (cons (car first) (diff (cdr first) second) ) )
-    ( (diff (cdr first) second) )
-  )
-)
-
-; Returns the item at an index
-(defun at (L n)
-  (cond
-    ((null L) nil)
-    ((= n 0) (car L))
-    ((at (cdr L) (- n 1)))
-  )
-)
-
-; takes the first n of a list 
-(defun take (L n)
-  (cond
-    ( (null L) NIL )
-    ( (<= n 0) NIL )
-    ( (cons (car L) (take (cdr L) (- n 1)) ) )
-  )
-)
-
-;;;;;
+; Load utility functions
+(load "utils")
 
 ; deleteAt removes an element from `L` 
-; at a specific 0-based index
+; at a specific zero based index
 (defun deleteAt (L index)
   (cond 
     ( (null L) NIL )
@@ -53,31 +17,39 @@
 (defun deleteAllAt (L &rest indexes)
   (cond
     ( (null indexes) L)
-    ( (apply 'deleteAllAt (deleteAt L (car indexes)) (minusOne (cdr indexes))) ) 
+    ( (apply 'deleteAllAt 
+        (deleteAt L (car indexes)) 
+        (minusOne (cdr indexes))
+      )
+    ) 
   ) 
 )
 
 
-; sums up all arguments
+; Takes the sum of all arguments
 (defun sumAll (&rest args)
   (cond
     ( (null args) 0 )
-    ( (atom (car args)) (+ (car args) (apply 'sumAll (cdr args)) ) )
+    ( (atom (car args))
+      (+ (car args) (apply 'sumAll (cdr args)) )
+    )
     ( (+ (eval (car args)) (apply 'sumAll (cdr args)) ) )
   )
 )
 
-; searches one list against another 
+; Searches one list against another 
 ; and returns similar elements 
 (defun similar (first second)
   (cond
     ( (null first) nil)
-    ( (member (car first) second) (cons (car first) (similar (cdr first) second) ) )
+    ( (member (car first) second) 
+      (cons (car first) (similar (cdr first) second) )
+    )
     ( ( similar (cdr first) second) )
   )
 )
 
-; return a list of of elements
+; Return a list of of elements
 ; that don't appear in either list
 (defun different (first second)
   (append (diff first second) (diff second first) )
@@ -91,7 +63,7 @@
   )
 )
 
-; Puts all arguments in a list
+; Constructs a list using the arguments
 (defun mcons (&rest L)
   (cond
     ( (null (cdr L)) (car L) )
@@ -99,6 +71,9 @@
   )
 )
 
+; Returns a list itmes by picking the
+; `n`th item from each sublist
+; in a list of lists `L`
 (defun each-nth (L n)
   (cond
     ( (null L) nil)

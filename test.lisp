@@ -3,6 +3,8 @@
 
 (load "functions")
 
+;; utility function testing
+
 (define-test test-minusOne
     (assert-equal '(0 1 2 3) (minusOne '(1 2 3 4)) )
     (assert-equal '() (minusOne '()) )
@@ -18,7 +20,9 @@
     (assert-equal 6 (at '(9 8 7 6 5 4 3 2 1) 3))
 )
 
-(define-test test-delleteAt
+;; Homework functions
+
+(define-test test-deleteAt
     (assert-equal '(1 2 4 5) (deleteAt '(1 2 3 4 5) 2)) 
     (assert-equal '(2 3 4 5) (deleteAt '(1 2 3 4 5) 0))
     (assert-equal '(1 2 3 4 5) (deleteAt '(1 2 3 4 5) 6))
@@ -50,7 +54,9 @@
 (define-test test-different
     (assert-equal '() (different '(1 2 3) '(3 1 2) ))
     (assert-equal '(A B C) (different '(A D E) '(D B C E)))
-    (assert-equal '(A C D E X (A C) R L) (different '(A B C D E) '( X (A C) B R L)) ) ; from hw
+    (assert-equal '(A C D E X (A C) R L) 
+        (different '(A B C D E) '( X (A C) B R L))
+    ) ; from hw
 )
 
 (define-test test-last-item
