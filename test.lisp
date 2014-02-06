@@ -20,6 +20,11 @@
     (assert-equal 6 (at '(9 8 7 6 5 4 3 2 1) 3))
 )
 
+(define-test test-is-member
+    (assert-equal NIL (is-member 'a '(b c d)))
+    (assert-equal T (is-member 'a '(a b c)))
+)
+
 ;; Homework functions
 
 (define-test test-deleteAt

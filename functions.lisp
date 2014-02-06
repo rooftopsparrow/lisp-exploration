@@ -42,7 +42,7 @@
 (defun similar (first second)
   (cond
     ( (null first) nil)
-    ( (member (car first) second) 
+    ( (is-member (car first) second) 
       (cons (car first) (similar (cdr first) second) )
     )
     ( ( similar (cdr first) second) )

@@ -15,8 +15,8 @@ Available on [github][1].
 
     ```
     Unit Test Summary
-     | 36 assertions total
-     | 36 passed
+     | 38 assertions total
+     | 38 passed
      | 0 failed
      | 0 execution errors
      | 0 missing tests

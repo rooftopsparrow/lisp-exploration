@@ -30,3 +30,13 @@
     ((at (cdr L) (- n 1)))
   )
 )
+
+; checks to see if element 
+; is a member of a list
+(defun is-member (i L)
+  (cond
+    ((null L) nil)
+    ((eq i (car L)) T)
+    ((is-member i (cdr L)))
+  )
+)
